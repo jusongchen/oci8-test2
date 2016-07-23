@@ -32,7 +32,6 @@ func main() {
 	}
 	defer db.Close()
 
-	fmt.Printf("Waiting for SIGHUP signal, press CTRL+C to continue . . . \n")
 	//we wont get "Illegal instruction: 4" before a DB operation
 	handleSIGHUP()
 
@@ -40,23 +39,17 @@ func main() {
 		fmt.Println(err)
 		return
 	}
-	fmt.Printf("Waiting for SIGHUP signal, press CTRL+C to continue . . . \n")
 
 	//we "Illegal instruction: 4" after a DB operation
 	handleSIGHUP()
 }
-
-// func sendSIGUP() {
-// 	time.Sleep(2 * time.Second)
-// 	syscall.Kill(syscall.Getpid(), syscall.SIGHUP)
-// }
 
 func handleSIGHUP() {
 	var wg sync.WaitGroup
 	wg.Add(1)
 	//
 
-	signalCh := make(chan os.Signal, 5)
+	signalCh := make(chan os.Signal, 1)
 	signal.Notify(signalCh, os.Interrupt)
 	signal.Notify(signalCh, syscall.SIGTERM, syscall.SIGTRAP)
 
@@ -65,6 +58,8 @@ func handleSIGHUP() {
 		fmt.Printf("\nSIGHUP received, ignore this signal and continue ...")
 		wg.Done()
 	}()
+
+	fmt.Printf("Waiting for SIGHUP signal, press CTRL+C to continue . . . \n")
 	wg.Wait()
 }
 
