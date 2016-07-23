@@ -11,8 +11,11 @@ Step to reproduce the issue:
 
 
 4) CTRL+C signal won't cause any issue before a DB operation.  However, after a DB operation, it will crash the programm with message 
+
 	"llegal instruction: 4" 	-- on Mac OS X 
+	
 	or "Trace/breakpoint trap" 	--on Ubuntu Linux.
+	
 
 
 
