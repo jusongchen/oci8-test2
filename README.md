@@ -10,7 +10,9 @@ Step to reproduce the issue:
 3) run the programm and enter CTRL+C after the prompt
 
 
-4) CTRL+C signal won't cause any issue before a DB operation.  However, it will crash the programm with message "llegal instruction: 4" on Mac OS X after a DB operation.
+4) CTRL+C signal won't cause any issue before a DB operation.  However, after a DB operation, it will crash the programm with message 
+	"llegal instruction: 4" 	-- on Mac OS X 
+	or "Trace/breakpoint trap" 	--on Ubuntu Linux.
 
 
 
